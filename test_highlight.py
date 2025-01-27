@@ -1,13 +1,13 @@
 import pytest
 import os
-from src.highlight import (  # Replace `your_module_name` with the actual filename without `.py`
+from src.highlight import ( 
     extract_text_from_pdf,
     split_text_to_fit_token_limit,
     highlight_pdf,
 )
 
-test_pdf_path = "../Papers/Tester/test.pdf"  # Use a small dummy PDF file for testing
-output_pdf_path = "../Papers/Tester/test_highlighted.pdf"  # Output path for highlighted PDF
+test_pdf_path = "../Papers/test.pdf"  # Use a small dummy PDF file for testing
+output_pdf_path = "../Papers/test_highlighted.pdf"  # Output path for highlighted PDF
 
 # Fixtures for setup
 @pytest.fixture

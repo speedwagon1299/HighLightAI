@@ -1,15 +1,7 @@
 import openai
 import PyPDF2
 import fitz 
-import ast
 from transformers import GPT2TokenizerFast
-from fuzzywuzzy import fuzz
-import os
-
-openai.api_key = os.environ.get("OPEN_AI_KEY_SEC")
-pdf_path = "Papers/Latest_Paper.pdf" # Path to the PDF file
-output_pdf_path = pdf_path.split('.pdf')[0] + "_highlighted.pdf" # Path to save the highlighted PDF
-tokenizer = GPT2TokenizerFast.from_pretrained("gpt2")
 
 def extract_important_points(text):
     """
@@ -24,7 +16,7 @@ def extract_important_points(text):
     
     try:
         response = openai.chat.completions.create(
-            model="gpt-3.5",
+            model="gpt-3.5-turbo",
             messages=[
                 {"role": "system", "content": """
                     Provide the important points in the text such that
@@ -52,7 +44,7 @@ def split_text_to_fit_token_limit(text, max_tokens=3500):
     Returns:
     - text_chunks: List of text chunks.
     """
-
+    tokenizer = GPT2TokenizerFast.from_pretrained("gpt2")
     tokens = tokenizer.encode(text)
     chunks = [tokens[i:i + max_tokens] for i in range(0, len(tokens), max_tokens)]
     text_chunks = [tokenizer.decode(chunk) for chunk in chunks]
@@ -101,16 +93,3 @@ def highlight_pdf(input_pdf, output_pdf, highlights):
                 highlight.update()
     
     doc.save(output_pdf)
-
-
-text = extract_text_from_pdf(pdf_path)
-
-text_chunks = split_text_to_fit_token_limit(text, max_tokens=3500)
-
-sentences = []
-
-for i, chunk in enumerate(text_chunks):
-    important_points = extract_important_points(chunk)  # Replace with your processing logic
-    sentences.extend(ast.literal_eval(important_points))
-
-highlight_pdf(pdf_path, output_pdf_path, sentences)
