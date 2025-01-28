@@ -9,3 +9,4 @@ pytest-cov==6.0.0
 lint==1.2.1
 black==24.10.0
 reportlab==4.2.5
+streamlit==1.41.1
