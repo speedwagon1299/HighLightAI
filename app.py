@@ -1,11 +1,13 @@
 import streamlit as st
 from src.highlight import extract_text_from_pdf, split_text_to_fit_token_limit, extract_important_points, highlight_pdf
-import os
+# import os
 import ast
 import openai
 import tempfile
 
-openai.api_key = os.getenv("OPENAI_API_KEY")
+openai.api_key = st.secrets["OPENAI_API_KEY"]
+# openai.api_key = os.getenv("OPENAI_API_KEY")
+
 
 st.set_page_config(page_title="PDF Highlighter", layout="centered", initial_sidebar_state="expanded")
 
