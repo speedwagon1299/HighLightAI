@@ -25,7 +25,7 @@ if uploaded_pdf:
 
     # Split into chunks
     st.write("📝 Splitting text to fit token limits...")
-    text_chunks = split_text_to_fit_token_limit(text, max_tokens=2500)
+    text_chunks = split_text_to_fit_token_limit(text, max_tokens=2000)
     st.success(f"Split into {len(text_chunks)} chunks.")
 
     # Extract important points
