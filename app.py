@@ -5,7 +5,7 @@ import ast
 import openai
 import tempfile
 
-openai.api_key = os.getenv("OPEN_API_KEY_SEC")
+openai.api_key = os.getenv("OPENAI_API_KEY")
 
 st.set_page_config(page_title="PDF Highlighter", layout="centered", initial_sidebar_state="expanded")
 
